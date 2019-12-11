@@ -14,12 +14,11 @@ curl -L https://raw.githubusercontent.com/bto/dotfiles/master/bin/installer.sh |
 
 # unshare
 
-- sudo unshare -p chroot rootfs /bin/bash
-- mount -t proc proc /proc
+- sudo unshare -fpm --mount-proc=/proc chroot rootfs /bin/bash
 - ps
 
 # setns
 
-- sudo unshare -p chroot rootfs /bin/bash
+- sudo unshare -fpm --mount-proc=/proc chroot rootfs /bin/bash
 - sudo ls -l /proc/xxxx/ns
-- sudo nsenter --pid=/proc/xxxx/ns/pid unshare -p chroot rootfs /bin/bash
+- sudo nsenter --pid=/proc/xxxx/ns/pid unshare -fpm --mount-proc=/proc chroot rootfs /bin/bash
