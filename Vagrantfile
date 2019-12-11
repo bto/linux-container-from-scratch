@@ -24,10 +24,4 @@ Vagrant.configure("2") do |config|
     # cgroups
     apt-get install -y cgroup-tools
   SHELL
-
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    sudo apt-get install -y make zsh
-    sudo chsh -s /usr/bin/zsh vagrant
-    curl -L https://raw.githubusercontent.com/bto/dotfiles/master/bin/installer.sh | bash
-  SHELL
 end
