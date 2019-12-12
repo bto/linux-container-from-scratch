@@ -26,3 +26,17 @@ sudo nsenter --pid=/proc/xxxx/ns/pid chroot rootfs /bin/bash
 
 sudo mount --bind -o ro $PWD/readonlyfiles $PWD/rootfs/var/readonlyfiles
 sudo chroot rootfs /bin/bash
+cat /var/readonlyfiles/hello.txt
+echo hello >> /var/readonlyfiles/hello.txt
+
+# cgroups
+
+sudo mkdir /sys/fs/cgroup/memory/demo
+ls /sys/fs/cgroup/memory/demo
+echo 100000000 | sudo tee /sys/fs/cgroup/memory/demo/memory.limit_in_bytes
+cat /sys/fs/cgroup/memory/demo/memory.limit_in_bytes
+
+cat /sys/fs/cgroup/memory/user.slice/tasks
+echo $$ | sudo tee -a /sys/fs/cgroup/memory/demo/tasks
+cat /sys/fs/cgroup/memory/demo/tasks
+cat /sys/fs/cgroup/memory/user.slice/tasks
