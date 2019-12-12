@@ -6,19 +6,23 @@ curl -L https://raw.githubusercontent.com/bto/dotfiles/master/bin/installer.sh |
 
 # chroot
 
-- sudo chroot rootfs /bin/bash
-- ps -> error
-  - mount -t proc proc /proc
-- top
-- pkill top
+sudo chroot rootfs /bin/bash
+ps
+top
+pkill top
 
 # unshare
 
-- sudo unshare -fpm --mount-proc=/proc chroot rootfs /bin/bash
-- ps
+sudo unshare -fp chroot rootfs /bin/bash
+ps
 
 # setns
 
-- sudo unshare -fpm --mount-proc=/proc chroot rootfs /bin/bash
-- sudo ls -l /proc/xxxx/ns
-- sudo nsenter --pid=/proc/xxxx/ns/pid unshare -fpm --mount-proc=/proc chroot rootfs /bin/bash
+sudo unshare -fp chroot rootfs /bin/bash
+sudo ls -l /proc/xxxx/ns
+sudo nsenter --pid=/proc/xxxx/ns/pid chroot rootfs /bin/bash
+
+# chroot with mount
+
+sudo mount --bind -o ro $PWD/readonlyfiles $PWD/rootfs/var/readonlyfiles
+sudo chroot rootfs /bin/bash
