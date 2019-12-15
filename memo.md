@@ -33,7 +33,7 @@ echo hello >> /var/readonlyfiles/hello.txt
 
 sudo mkdir /sys/fs/cgroup/memory/demo
 ls /sys/fs/cgroup/memory/demo
-echo 100000000 | sudo tee /sys/fs/cgroup/memory/demo/memory.limit_in_bytes
+echo $((1024 * 1024 * 100)) | sudo tee /sys/fs/cgroup/memory/demo/memory.limit_in_bytes
 cat /sys/fs/cgroup/memory/demo/memory.limit_in_bytes
 
 cat /sys/fs/cgroup/memory/user.slice/tasks
