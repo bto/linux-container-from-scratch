@@ -47,3 +47,8 @@ cp /bin/ping .
 sudo setcap cap_net_raw+ep ./ping
 getcap ./ping
 ./ping 127.0.0.1
+
+capsh --print
+sudo /bin/bash
+capsh --print
+sudo capsh --drop=cap_chown,cap_setpcap,cap_setfcap,cap_sys_admin --chroot=$PWD/rootfs --
